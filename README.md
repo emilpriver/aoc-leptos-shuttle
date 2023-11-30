@@ -1,5 +1,7 @@
 # AdventOfCode Leaderbord Leptos
 
+![Leaderboard](./image.png)
+
 AdventOfCode Leaderbord built in leptos and rust. 
 It is refetching the leaderbord every 15 minutes
 
