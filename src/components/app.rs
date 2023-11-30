@@ -2,7 +2,6 @@ use leptos::{leptos_dom::helpers::IntervalHandle, leptos_dom::logging::console_l
 use serde::{Deserialize, Serialize};
 use std::env;
 use std::time::Duration;
-use tracing;
 
 #[derive(Debug, Deserialize, Serialize, PartialEq, Eq, Clone)]
 pub struct Member {

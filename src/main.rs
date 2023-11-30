@@ -12,7 +12,6 @@ mod utils;
 #[cfg(feature = "ssr")]
 #[actix_web::main]
 pub async fn main() -> std::io::Result<()> {
-    // Setting this to None means we'll be using cargo-leptos and its env vars.
     let conf = get_configuration(None).await.unwrap();
 
     let port: String = env::var("PORT")
@@ -45,9 +44,16 @@ pub async fn main() -> std::io::Result<()> {
 
     utils::load_env_variables();
 
+    let _ = env::var("LEADERBOARD_ID").expect("missing LEADERBOARD_ID env variable");
+    let _ = env::var("SESSION_COOKIE_TOKEN").expect("missing SESSION_COOKIE_TOKEN env variable");
+
+    let addr_clone = addr.clone();
+
     HttpServer::new(move || {
         let leptos_options = &conf.leptos_options;
         let site_root = &leptos_options.site_root;
+
+        println!("Listening on {:?}", addr_clone);
 
         App::new()
             .service(Files::new("/pkg", format!("{site_root}/pkg")))
