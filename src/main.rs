@@ -1,7 +1,7 @@
 use actix_files::Files;
-use aoc::app::App;
 use actix_web::middleware::Logger;
 use actix_web::*;
+use aoc::App;
 use leptos::*;
 use leptos_actix::{generate_route_list, LeptosRoutes};
 use std::env;
@@ -11,7 +11,7 @@ mod utils;
 
 #[cfg(feature = "ssr")]
 #[actix_web::main]
-pub async fn run() -> std::io::Result<()> {
+pub async fn main() -> std::io::Result<()> {
     // Setting this to None means we'll be using cargo-leptos and its env vars.
     let conf = get_configuration(None).await.unwrap();
 
@@ -53,6 +53,7 @@ pub async fn run() -> std::io::Result<()> {
             .service(Files::new("/pkg", format!("{site_root}/pkg")))
             .service(Files::new("/assets", site_root))
             .wrap(Logger::default())
+            .service(favicon)
             .route("/leptos/{tail:.*}", leptos_actix::handle_server_fns())
             .leptos_routes(
                 leptos_options.to_owned(),
@@ -72,4 +73,15 @@ pub fn main() {
     // no client-side main function
     // unless we want this to work with e.g., Trunk for a purely client-side app
     // see lib.rs for hydration function instead
+}
+
+#[actix_web::get("favicon.ico")]
+async fn favicon(
+    leptos_options: actix_web::web::Data<leptos::LeptosOptions>,
+) -> actix_web::Result<actix_files::NamedFile> {
+    let leptos_options = leptos_options.into_inner();
+    let site_root = &leptos_options.site_root;
+    Ok(actix_files::NamedFile::open(format!(
+        "{site_root}/favicon.ico"
+    ))?)
 }
