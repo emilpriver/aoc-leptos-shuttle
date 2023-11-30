@@ -1,5 +1,5 @@
 [package]
-name = "shuttle-leptos"
+name = "aoc"
 version = "0.1.0"
 edition = "2021"
 
@@ -20,12 +20,20 @@ simple_logger = "4"
 tokio = { version = "1.25.0", optional = true }
 tower = { version = "0.4.13", optional = true }
 tower-http = { version = "0.4", features = ["fs"], optional = true }
-wasm-bindgen = "=0.2.87"
+wasm-bindgen = "=0.2.89"
 thiserror = "1.0.38"
 tracing = { version = "0.1.37", optional = true }
 http = "0.2.8"
 shuttle-runtime = { version = "0.28.0", default-features = false, optional = true }
 shuttle-axum = { version = "0.28.0", optional = true }
+serde = { version = "1.0.193", features = ["derive"] }
+serde_derive = "1.0.193"
+reqwest = { version = "0.11.22", features = ["json", "blocking", "serde_json", "cookies"] }
+serde_json = "1.0.108"
+leptos_actix = "0.5.4"
+actix-web = "4.4.0"
+actix-files = "0.6.2"
+tracing-subscriber = "0.3.18"
 
 [features]
 hydrate = ["leptos/hydrate", "leptos_meta/hydrate", "leptos_router/hydrate"]
@@ -60,7 +68,7 @@ panic = "abort"
 
 [package.metadata.leptos]
 # The name used by wasm-bindgen/cargo-leptos for the JS/WASM bundle. Defaults to the crate name
-output-name = "shuttle-leptos"
+output-name = "aoc"
 
 # The site root folder is where cargo-leptos generate all output. WARNING: all content of this folder will be erased on a rebuild. Use it in your server setup.
 site-root = "target/site"

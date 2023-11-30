@@ -1,5 +1,0 @@
-name = "leptos-starter"
-
-assets = [
-    "target/site/*"
-]
