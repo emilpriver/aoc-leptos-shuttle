@@ -19,6 +19,4 @@ COPY --from=builder /usr/src/app/aoc /usr/src/aoc/aoc
 
 WORKDIR /usr/src/aoc
 
-run ls -al
-
 CMD ["./aoc"]
