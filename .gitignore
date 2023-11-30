@@ -13,3 +13,5 @@ playwright/.cache/
 
 # Leptos build artifacts
 /site/
+
+.env
