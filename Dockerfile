@@ -1,4 +1,4 @@
-FROM rust:1.74.0
+FROM rust:1.74.0 as builder
 WORKDIR /usr/src/app
 COPY . .
 
@@ -14,6 +14,11 @@ ENV LEPTOS_OUTPUT_NAME="aoc"
 ENV LEPTOS_SITE_ROOT="site"
 ENV LEPTOS_SITE_PKG_DIR="pkg"
 
-WORKDIR /usr/src/app
+FROM rust:1.74.0
+COPY --from=builder /usr/src/app/aoc /usr/src/aoc/aoc
+
+WORKDIR /usr/src/aoc
+
+run ls -al
 
 CMD ["./aoc"]
