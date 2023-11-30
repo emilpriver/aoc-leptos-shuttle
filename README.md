@@ -6,7 +6,7 @@ It is refetching the leaderbord every 15 minutes
 ## Run
 
 ```bash
-docker run -e LEADERBOARD_ID=X -e SESSION_COOKIE_TOKEN=X emilpriver/aoc-leptos:latest
+docker run -e LEADERBOARD_ID=X -e SESSION_COOKIE_TOKEN=X emilpriver/aoc-leaderbord:latest
 ```
 
 ## Environment variables
